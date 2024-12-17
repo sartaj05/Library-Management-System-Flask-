@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Borrowing History - Library Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container-fluid {
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            color: #007bff;
+        }
+        table {
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        table td {
+            background-color: #f9f9f9;
+        }
+        .sidebar {
+            background-color: #f1f1f1;
+            padding-top: 20px;
+        }
+        .nav-link.active {
+            color: #007bff;
+        }
+        .nav-link:hover {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+            <a class="navbar-brand font-weight-bold" href="#">Library <i class="fas fa-book"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+        </nav>
+
+
+
+    
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar shadow-sm">
+                <div class="position-sticky">
+                    <h4 class="mt-3 text-center">Library Menu</h4>
+                    <ul class="nav flex-column mt-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/index">
+                                <i class="fas fa-home mr-2"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/addBook">
+                                <i class="fas fa-plus mr-2"></i> Add Book
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">
+                                <i class="fas fa-user-plus mr-2"></i> Register Member
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/borrow">
+                                <i class="fas fa-book-open mr-2"></i> Borrow Book
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/return">
+                                <i class="fas fa-undo mr-2"></i> Return Book
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/history">
+                                <i class="fas fa-history mr-2"></i> Borrowing History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/status">
+                              <i class="fas fa-history mr-2"></i> Borrowing Status History
+                          </a>
+                      </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+                <h1>Borrowing History</h1>
+
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Borrow ID</th>
+                            <th>Member ID</th>
+                            <th>Book ID</th>
+                            <th>Borrow Date</th>
+                            <th>Return Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="borrowingHistoryTableBody">
+                        <!-- Borrowing history data will be loaded here dynamically -->
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../static/view-borrowing-history.js"></script>
+</body>
+</html>

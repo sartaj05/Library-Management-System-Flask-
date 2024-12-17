@@ -1,0 +1,51 @@
+body {
+  background-color: #f8f9fa; /* Light background for better contrast */
+}
+
+h1, h2 {
+  color: #343a40; /* Darker color for headings */
+}
+
+.container-fluid {
+  margin-top: 20px; /* Space above the content */
+}
+
+.table {
+  transition: transform 0.2s ease-in-out; /* Animation for table rows */
+}
+
+.table:hover {
+  transform: scale(1.01); /* Slightly enlarge on hover */
+}
+
+.btn-primary {
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darken button on hover */
+}
+
+.btn-danger {
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darken remove button on hover */
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .container-fluid {
+      padding: 0 15px; /* Adjust padding for mobile */
+  }
+  
+  .sidebar {
+      position: static; /* Make sidebar static for mobile */
+      margin-bottom: 20px; /* Add margin below sidebar */
+  }
+  
+  main {
+      margin-left: 0; /* Remove left margin on mobile */
+  }
+}

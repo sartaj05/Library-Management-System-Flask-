@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Book - Library Management System</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../static/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../static/add-book.css" />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container-fluid {
+        background-color: #fff;
+        padding: 0;
+        margin: 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1, h2 {
+        color: #007bff;
+      }
+      .form-group label {
+        font-weight: bold;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 10px;
+      }
+      .table th, .table td {
+        vertical-align: middle;
+      }
+      .card {
+        margin-top: 3rem;
+      }
+      .card-body {
+        padding: 2rem;
+      }
+      #searchInput {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .alert {
+        margin-top: 20px;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .page-button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .page-button:hover {
+        background-color: #0056b3;
+      }
+      .page-button.active {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+          <a class="navbar-brand font-weight-bold " href="#">Library <i class="fas fa-book"></i></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          
+      </nav>
+
+      <div class="row">
+          <!-- Sidebar Menu -->
+          <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar shadow-sm">
+              <div class="position-sticky">
+                  <h4 class="mt-3 text-center">Library Menu</h4>
+                  <ul class="nav flex-column mt-3">
+                      <li class="nav-item">
+                          <a class="nav-link active" href="/index">
+                              <i class="fas fa-home mr-2"></i> Home
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/addBook">
+                              <i class="fas fa-plus mr-2"></i> Add Book
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/register">
+                              <i class="fas fa-user-plus mr-2"></i> Register Member
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/borrow">
+                              <i class="fas fa-book-open mr-2"></i> Borrow Book
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/return">
+                              <i class="fas fa-undo mr-2"></i> Return Book
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/history">
+                              <i class="fas fa-history mr-2"></i> Borrowing History
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/status">
+                            <i class="fas fa-history mr-2"></i> Borrowing Status History
+                        </a>
+                    </li>
+                  </ul>
+              </div>
+          </nav>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+          <h1 class="mt-5">Add Book</h1>
+
+          <!-- Validation Message Area -->
+          <div id="validationMessage"></div>
+
+          <!-- Add Book Form -->
+          <form id="addBookForm" onsubmit="return addBook(event)">
+            <div class="form-group">
+              <label for="bookTitle">Book Title</label>
+              <input
+                type="text"
+                class="form-control"
+                name="bookTitle"
+                id="bookTitle"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="bookAuthor">Author</label>
+              <input
+                type="text"
+                class="form-control"
+                name="bookAuthor"
+                id="bookAuthor"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="availableCopies">Available Copies</label>
+              <input
+                type="number"
+                class="form-control"
+                name="availableCopies"
+                id="availableCopies"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+          </form>
+
+          <!-- Book Table -->
+          <h2 class="mt-5">Books</h2>
+
+          <!-- Search Input -->
+          <div class="form-group">
+            <label for="searchBook">Search Book</label>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search by title or author"
+              oninput="searchBooks()"
+            />
+          </div>
+
+          <!-- Books Table -->
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-striped mt-3" id="booksTable">
+                <thead>
+                  <tr>
+                    <th>Book ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Available Copies</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="booksTableBody">
+                  <!-- Book rows will be dynamically inserted here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pagination Controls -->
+          <div id="paginationContainer" class="pagination">
+            <!-- Pagination buttons will be inserted here -->
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Include JavaScript File -->
+    <script src="../static/add-book.js"></script>
+  </body>
+</html>
